@@ -18,17 +18,27 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// List all posts
-Route::get('posts', 'PostController@index');
+Route::middleware('auth:api')->group( function(){
+  // List all posts
+  Route::get('posts', 'PostController@index');
+  
+  // List all roles
+  Route::get('roles', 'RoleController@index');
+  // List a single role
+  Route::get('role/{id}', 'RoleController@show');
+  // Create a new role
+  Route::post('role', 'RoleController@store');
+  // Update a role
+  Route::put('role', 'RoleController@store');
+  // Delete a role
+  Route::delete('role/{id}', 'RoleController@destroy');
+});
 
 // List a single post
 Route::get('post/{id}', 'PostController@show');
-
 // Create a new post
 Route::post('post', 'PostController@store');
-
 // Update a post
 Route::put('post', 'PostController@store');
-
 // Delete a post
 Route::delete('post/{id}', 'PostController@destroy');

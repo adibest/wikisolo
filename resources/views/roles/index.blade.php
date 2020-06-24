@@ -11,7 +11,7 @@
 <body class="container-fluid">
 <div id="app">
     <navbar></navbar>
-    <post-list></post-list>
+    <role-index></role-index>
     <passport-clients></passport-clients>
     <passport-authorized-clients></passport-authorized-clients>
     <passport-personal-access-tokens></passport-personal-access-tokens>

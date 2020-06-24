@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welkam');
 });
 
+Route::get('/role', function () {
+    return view('roles.index');
+});
+
+Route::resource('roles', 'RoleController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
