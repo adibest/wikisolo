@@ -8,6 +8,10 @@ use App\Http\Resources\Role as RoleResource;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index','show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +49,7 @@ class RoleController extends Controller
         $role->name  = $request->input('name');
 
         if ($role->save()) {
-          if ($this->roleplay() == 1) {
             return new RoleResource($role);
-          } else {
-            return "You are not allowed";
-          }
         }
     }
 

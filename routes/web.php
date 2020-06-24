@@ -17,12 +17,20 @@ Route::get('/', function () {
     return view('welkam');
 });
 
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
 Route::get('/role', function () {
     return view('roles.index');
 });
 
 Route::resource('roles', 'RoleController');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
