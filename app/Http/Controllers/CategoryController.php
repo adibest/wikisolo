@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Role;
-use App\Http\Resources\Role as RoleResource;
+use App\Model\Category;
 
-class RoleController extends Controller
+class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(5);
-
-        return RoleResource::collection($roles);
-        // return view('roles.index', compact($roles));
+        return view('categories.index');
     }
 
     /**
@@ -39,18 +39,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        // $q = Auth::check() && Auth::user()->role_id;
-        $role        = $request->isMethod('put') ? Role::findOrFail($request->id) : new Role;
-        $role->id    = $request->input('id');
-        $role->name  = $request->input('name');
-
-        if ($role->save()) {
-          if ($this->roleplay() == 1) {
-            return new RoleResource($role);
-          } else {
-            return "You are not allowed";
-          }
-        }
+        return Category::create($request->all());
     }
 
     /**
@@ -61,11 +50,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        // // Get a single role
-        $role = Role::findOrFail($id);
-
-        // Return a single role as a resource
-        return new RoleResource($role);
+        //
     }
 
     /**
@@ -99,12 +84,6 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        // Get the role
-        $role = Role::findOrFail($id);
-
-        //  Delete the role, return as confirmation
-        if ($role->delete()) {
-            return new RoleResource($role);
-        }
+        //
     }
 }
