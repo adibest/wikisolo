@@ -7,10 +7,6 @@ use App\Model\Category;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+      $response = ['message' => 'get function'];
+      return response($response, 200);
     }
 
     /**
@@ -39,7 +36,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return Category::create($request->all());
+      $response = ['message' => 'store function'];
+      return response($response, 200);
     }
 
     /**
@@ -73,7 +71,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $response = ['message' => 'update function'];
+      return response($response, 200);
     }
 
     /**
@@ -84,6 +83,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $response = ['message' => 'delete function'];
+      return response($response, 200);
     }
 }
