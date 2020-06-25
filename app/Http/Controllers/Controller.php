@@ -11,10 +11,4 @@ use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function roleplay()
-    {
-        $foo = Auth::user('role_id');
-        return $foo;
-    }
 }

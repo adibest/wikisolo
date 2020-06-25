@@ -28,4 +28,9 @@ class Role extends JsonResource
            'api_url' => url('http://localhost:8000/api')
         ];
     }
+
+    public function withResponse($request, $response)
+    {
+        $response->header('X-Value', 'True');
+    }
 }

@@ -4,13 +4,14 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
-use App\Http\Controllers\API\BaseController as BaseController;
+// use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends BaseController
+class RegisterController extends Controller
 {
     /**
      * Where to redirect users after registration/login.
@@ -18,6 +19,11 @@ class RegisterController extends BaseController
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 
     public function register(Request $request)
     {
@@ -38,21 +44,7 @@ class RegisterController extends BaseController
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
 
-        return $this->sendResponse($success, 'User register successfully.');
-    }
-
-    public function login(Request $request)
-    {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')-> accessToken;
-            $success['name'] =  $user->name;
-
-            return $this->sendResponse($success, 'User login successfully.');
-            // return redirect('/home');
-        }
-        else{
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
-        }
+        // return $this->sendResponse($success, 'User register successfully.');
+        return $redirectTo;
     }
 }
